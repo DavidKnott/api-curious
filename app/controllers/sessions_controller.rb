@@ -1,9 +1,8 @@
 class SessionsController < ApplicationController
   def create
-    byebug
-    @user = User.find_or_create_from_auth_hash(auth_hash)
-    self.current_user = @user
-    redirect_to '/'
+    user = User.find_or_create_from(request.env["omniauth.auth"])
+    session[:user_id] = user.id
+    redirect_to profile_path
   end
 
   protected
