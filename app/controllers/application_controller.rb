@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       conn.params = {"grant_type" => "refresh_token", "refresh_token" => "#{current_user.refresh_token}"}
       response = conn.post "https://www.reddit.com/api/v1/access_token"
       response = JSON.parse(response.body)
-      current_user.refresh(response.body)
+      current_user.refresh(response)
     end
   end
 

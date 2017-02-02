@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = current_user.get_most_recent
+    @posts = Post.get_most_recent_for(current_user)
   end
 
 end

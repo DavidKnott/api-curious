@@ -15,16 +15,4 @@ class User < ApplicationRecord
     self.update(token: auth["access_token"])
   end
 
-  def get_most_recent
-    conn = Faraday.new 'https://oauth.reddit.com'
-    raw_subreddits = conn.get do |req|
-      req.headers['Content-Type'] = 'application/json'
-      req.headers['Authorization'] = "bearer #{self.token}"
-      req.params['limit'] = "15"
-    end
-    attrs = JSON.parse(raw_subreddits.body, symbolize_names: true)[:data][:children]
-    @posts = attrs.map do |attr|
-      Post.new(attr[:data])
-    end
-  end
 end
