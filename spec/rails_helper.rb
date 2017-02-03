@@ -5,6 +5,35 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'vcr'
+
+VCR.configure do |config|
+  config.cassette_library_dir = "fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  config.filter_sensitive_data('<REDDIT_KEY>', 'REDDIT_SECRET') do |interaction|
+    ENV['REDDIT_KEY']
+    ENV['REDDIT_SECRET']
+  end
+end
+
+  OmniAuth.config.test_mode = true
+  omniauth_hash = { 'provider' => 'reddit',
+                    'uid' => '12345',
+                    'credentials' => {
+                        'token' => '6',
+                        'refresh_token' => '12'
+                    },
+                    'info'  => {'name' => "david1k1"},
+                    'extra' => {'raw_info' =>
+                                    { 'comment_karma' => '12',
+                                    }
+                    }
+                  }
+
+  OmniAuth.config.add_mock(:reddit, omniauth_hash)
+
+
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

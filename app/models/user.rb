@@ -5,7 +5,7 @@ class User < ApplicationRecord
     user.reddit_user_id = auth.uid
     user.token          = auth.credentials.token
     user.refresh_token  = auth.credentials.refresh_token
-    user.username          = auth.info.name
+    user.username       = auth.info.name
     user.comment_karma  = auth.extra.raw_info.comment_karma
     user.save
     user
