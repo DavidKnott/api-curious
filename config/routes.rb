@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   #profile
   resource :profile, only: [:show]
   resources :posts, only: [:index]
+  get "/post", to: "posts#show"
 end

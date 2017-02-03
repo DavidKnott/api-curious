@@ -23,4 +23,5 @@ class Post
       new(attr[:data])
     end
   end
+
 end
