@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.get_posts_for(current_user, params[:q])
+    @posts, @rules = Post.get_posts_and_rules_for(current_user, params[:q])
   end
 
   def show
