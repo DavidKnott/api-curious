@@ -1,0 +1,8 @@
+<% @rules.each do |rule| %>
+  <h3><%= rule.title %></h3>
+  <p><%= rule.description %></p>
+<% end %>
+<% @posts.each do |post| %>
+  <h2 class="title"><%= link_to post.title, post.url %></h2>
+  <h3 class="num_comments"><%= link_to "#{post.num_comments} comments", "/post?permalink=#{post.permalink}"  %> Score: <%= post.score %></h3>
+<% end %>
