@@ -1,4 +1,4 @@
 <% @posts.each do |post| %>
-  <h2 class="title"><%= link_to post.title, "/post?permalink=#{post.permalink}" %></h2>
-  <h3 class="num_comments">Score: <%= post.score %> Comments:<%= post.num_comments %></h3>
+  <h2 class="title"><%= link_to post.title, post.url %></h2>
+  <h3 class="num_comments"><%= link_to "#{post.num_comments} comments", "/post?permalink=#{post.permalink}"  %> Score: <%= post.score %></h3>
 <% end %>

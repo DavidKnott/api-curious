@@ -4,7 +4,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comments = Comment.get_comments_for(params[:permalink], current_user)
+    @post, @comments =  Comment.get_post_and_comments_for(params[:permalink], current_user)
+    # @post = 
+    # @comments = 
   end
 
 end

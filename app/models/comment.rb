@@ -17,11 +17,13 @@ class Comment
     'comment'
   end
 
-  def self.get_comments_for(link, user)
+  def self.get_post_and_comments_for(link, user)
     raw_comments = RedditService.get_comments_for(link, user)
+    post = Post.new(raw_comments.first[:data][:children].first[:data])
     comments = raw_comments.last[:data][:children].map do |raw_comment|
       Comment.get_replies(raw_comment)
     end
+    return post, comments
   end
 
   def self.get_replies(raw_comment)
