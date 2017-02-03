@@ -1,6 +1,6 @@
 class RedditService
-  def self.get_posts_for(user)
-    conn = Faraday.new 'https://oauth.reddit.com'
+  def self.get_posts_for(user, subreddit_link = "")
+    conn = Faraday.new "https://oauth.reddit.com/r/#{subreddit_link}"
     raw_posts = conn.get do |req|
       req.headers['Content-Type'] = 'application/json'
       req.headers['Authorization'] = "bearer #{user.token}"
@@ -20,6 +20,5 @@ class RedditService
     end
     attr = JSON.parse(raw_posts.body, symbolize_names: true)
   end
-  
 
 end

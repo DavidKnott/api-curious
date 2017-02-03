@@ -18,8 +18,8 @@ class Post
     @score        = attrs[:score]
   end
 
-  def self.get_posts_for(user)
-    RedditService.get_posts_for(user).map do |attr|
+  def self.get_posts_for(user, subreddit_link)
+    RedditService.get_posts_for(user, subreddit_link).map do |attr|
       new(attr[:data])
     end
   end

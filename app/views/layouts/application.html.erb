@@ -9,6 +9,12 @@
   </head>
   <%= link_to "Login", reddit_login_path %>
   <%= link_to "Subreddit", posts_path %>
+  <%= form_tag :posts, method: :get, class: "form-inline" do %>
+    <div class="form-group search-field">
+      <%= text_field_tag :q, "Search for a Subreddit", class: "form-control" %>
+      <%= submit_tag "Locate", class: "btn btn-primary" %>
+    </div>
+  <% end %>
   <body>
     <%= yield %>
   </body>
